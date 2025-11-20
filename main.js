@@ -1,42 +1,29 @@
-// Load Navbar
-const navbarLoaded = fetch("navbar.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("navbar").innerHTML = html;
-  });
+// load navbar
+const loadHTML = (selector, file) =>
+  fetch(file)
+    .then(res => res.text())
+    .then(html => (document.querySelector(selector).innerHTML = html));
 
-// Load Mobile Menu
-const menuLoaded = fetch("mobileMenu.html")
-  .then(res => res.text())
-  .then(html => {
-    document.getElementById("mobileMenuContainer").innerHTML = html;
-  });
+Promise.all([
+  loadHTML("#navbar", "navbar.html"),
+  loadHTML("#mobileMenuContainer", "mobileMenu.html")
+]).then(() => {
+  const menuBtn = document.querySelector("#menuBtn");
+  const closeBtn = document.querySelector("#closeBtn");
+  const mobileMenu = document.querySelector("#mobileMenu");
 
-// mobile responsive navbar logic
-Promise.all([navbarLoaded, menuLoaded]).then(() => {
-  const menuBtn = document.getElementById("menuBtn");
-  const closeBtn = document.getElementById("closeBtn");
-  const mobileMenu = document.getElementById("mobileMenu");
+  const toggleMenu = (open) => {
+    mobileMenu.style.right = open ? "0" : "-260px";
+  };
 
-  if (!menuBtn || !closeBtn || !mobileMenu) {
-    console.error("❌ Elements missing! Check IDs.");
-    return;
-  }
+  // Open mobile menu
+  menuBtn.addEventListener("click", () => toggleMenu(true));
 
-  // Open menu
-  menuBtn.addEventListener("click", () => {
-    mobileMenu.style.right = "0";
-  });
+  // Close mobile menu
+  closeBtn.addEventListener("click", () => toggleMenu(false));
 
-  // Close menu
-  closeBtn.addEventListener("click", () => {
-    mobileMenu.style.right = "-260px";
+  // Auto-close when menu link is clicked (using event delegation)
+  mobileMenu.addEventListener("click", (e) => {
+    if (e.target.closest("a")) toggleMenu(false);
   });
 });
-
-document.addEventListener("click", (e) => {
-  if (e.target.closest("#mobileMenu a")) {
-    document.getElementById("mobileMenu").style.right = "-260px";
-  }
-});
-
