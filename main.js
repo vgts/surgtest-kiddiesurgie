@@ -90,7 +90,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
   const formData = new FormData(form);
 
   fetch(
-    "https://n8n.techdemo.in/webhook-test/book-appointment",
+    "https://n8n.techdemo.in/webhook/book-appointment",
     {
       method: "POST",
       body: formData,
