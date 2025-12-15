@@ -48,7 +48,7 @@ document.getElementById("questionForm").addEventListener("submit", function (e) 
   document.getElementById("successPopup").classList.remove("hidden");
   form.reset();
   fetch(
-    "https://n8n.techdemo.in/webhook-test/ask-a-question",
+    "https://n8n.techdemo.in/webhook/ask-a-question",
     {
       method: "POST",
       body: formData,
