@@ -110,24 +110,67 @@ function closePopup() {
 const track = document.getElementById("carouselTrack");
 const slides = track.children;
 let index = 0;
+let intervalId;
 
+// ---------- SLIDE LOGIC ----------
 function moveSlide() {
   index++;
 
   track.style.transition = "transform 0.7s ease-in-out";
   track.style.transform = `translateX(-${index * slides[0].offsetWidth}px)`;
 
-  // When last slide is reached
+  // Reset when last slide reached
   if (index === slides.length) {
     setTimeout(() => {
-      track.style.transition = "none"; // remove animation
+      track.style.transition = "none";
       track.style.transform = "translateX(0px)";
       index = 0;
-    }, 700); // same as transition duration
+    }, 700);
   }
 }
 
-setInterval(moveSlide, 3500);
+// ---------- START / STOP ----------
+function startAutoSlide() {
+  intervalId = setInterval(moveSlide, 3500);
+}
+
+function stopAutoSlide() {
+  clearInterval(intervalId);
+}
+
+// ---------- INIT ----------
+startAutoSlide();
+
+// ---------- USER INTERACTION ----------
+track.addEventListener("mouseenter", stopAutoSlide);
+track.addEventListener("mouseleave", startAutoSlide);
+
+// Mobile touch support
+track.addEventListener("touchstart", stopAutoSlide, { passive: true });
+track.addEventListener("touchend", startAutoSlide);
+
+
+// const track = document.getElementById("carouselTrack");
+// const slides = track.children;
+// let index = 0;
+
+// function moveSlide() {
+//   index++;
+
+//   track.style.transition = "transform 0.7s ease-in-out";
+//   track.style.transform = `translateX(-${index * slides[0].offsetWidth}px)`;
+
+//   // When last slide is reached
+//   if (index === slides.length) {
+//     setTimeout(() => {
+//       track.style.transition = "none"; // remove animation
+//       track.style.transform = "translateX(0px)";
+//       index = 0;
+//     }, 700); // same as transition duration
+//   }
+// }
+
+// setInterval(moveSlide, 3500);
 
 
 //--------------FAQ section arrow --------------------//
