@@ -109,68 +109,70 @@ function closePopup() {
 
 const track = document.getElementById("carouselTrack");
 const slides = track.children;
+
 let index = 0;
-let intervalId;
+let startX = 0;
+let currentTranslate = 0;
+let prevTranslate = 0;
+let isDragging = false;
 
-// ---------- SLIDE LOGIC ----------
-function moveSlide() {
-  index++;
-
-  track.style.transition = "transform 0.7s ease-in-out";
-  track.style.transform = `translateX(-${index * slides[0].offsetWidth}px)`;
-
-  // Reset when last slide reached
-  if (index === slides.length) {
-    setTimeout(() => {
-      track.style.transition = "none";
-      track.style.transform = "translateX(0px)";
-      index = 0;
-    }, 500);
-  }
+// ---------- HELPERS ----------
+function setPosition() {
+  track.style.transform = `translateX(${currentTranslate}px)`;
 }
 
-// ---------- START / STOP ----------
-function startAutoSlide() {
-  intervalId = setInterval(moveSlide, 3500);
+function slideToIndex() {
+  const slideWidth = slides[0].offsetWidth;
+  currentTranslate = -index * slideWidth;
+  prevTranslate = currentTranslate;
+  track.style.transition = "transform 0.4s ease";
+  setPosition();
 }
 
-function stopAutoSlide() {
-  clearInterval(intervalId);
+function clampIndex() {
+  index = Math.max(0, Math.min(index, slides.length - 1));
 }
 
-// ---------- INIT ----------
-startAutoSlide();
+// ---------- DRAG START ----------
+function dragStart(e) {
+  isDragging = true;
+  startX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  track.style.transition = "none";
+}
 
-// ---------- USER INTERACTION ----------
-track.addEventListener("mouseenter", stopAutoSlide);
-track.addEventListener("mouseleave", startAutoSlide);
+// ---------- DRAG MOVE ----------
+function dragMove(e) {
+  if (!isDragging) return;
+  const currentX = e.type.includes("mouse") ? e.pageX : e.touches[0].clientX;
+  currentTranslate = prevTranslate + (currentX - startX);
+  setPosition();
+}
 
-// Mobile touch support
-track.addEventListener("touchstart", stopAutoSlide, { passive: true });
-track.addEventListener("touchend", startAutoSlide);
+// ---------- DRAG END ----------
+function dragEnd() {
+  if (!isDragging) return;
+  isDragging = false;
 
+  const slideWidth = slides[0].offsetWidth;
+  const movedBy = currentTranslate - prevTranslate;
 
-// const track = document.getElementById("carouselTrack");
-// const slides = track.children;
-// let index = 0;
+  if (movedBy < -slideWidth / 4) index++;
+  if (movedBy > slideWidth / 4) index--;
 
-// function moveSlide() {
-//   index++;
+  clampIndex();
+  slideToIndex();
+}
 
-//   track.style.transition = "transform 0.7s ease-in-out";
-//   track.style.transform = `translateX(-${index * slides[0].offsetWidth}px)`;
+// ---------- MOUSE EVENTS ----------
+track.addEventListener("mousedown", dragStart);
+window.addEventListener("mousemove", dragMove);
+window.addEventListener("mouseup", dragEnd);
 
-//   // When last slide is reached
-//   if (index === slides.length) {
-//     setTimeout(() => {
-//       track.style.transition = "none"; // remove animation
-//       track.style.transform = "translateX(0px)";
-//       index = 0;
-//     }, 700); // same as transition duration
-//   }
-// }
+// ---------- TOUCH EVENTS ----------
+track.addEventListener("touchstart", dragStart, { passive: true });
+track.addEventListener("touchmove", dragMove, { passive: true });
+track.addEventListener("touchend", dragEnd);
 
-// setInterval(moveSlide, 3500);
 
 
 //--------------FAQ section arrow --------------------//
