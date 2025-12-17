@@ -87,4 +87,13 @@ body {
 .animate-hr {
   animation: hr-reveal 4s ease-in-out infinite;
 }
+/* swiper color */
+.swiper-pagination-bullet {
+  background-color: #FC8F3A; /* orange */
+  opacity: 0.4;
+}
 
+.swiper-pagination-bullet-active {
+  background-color: #FC8F3A; /* orange */
+  opacity: 1;
+}
