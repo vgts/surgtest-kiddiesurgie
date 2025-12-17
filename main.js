@@ -125,7 +125,7 @@ function moveSlide() {
       track.style.transition = "none";
       track.style.transform = "translateX(0px)";
       index = 0;
-    }, 700);
+    }, 500);
   }
 }
 
