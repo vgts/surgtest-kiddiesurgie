@@ -89,11 +89,11 @@ body {
 }
 /* swiper color */
 .swiper-pagination-bullet {
-  background-color: #FC8F3A; /* orange */
+  background-color: #FC8F3A; 
   opacity: 0.4;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #FC8F3A; /* orange */
+  background-color: #FC8F3A; 
   opacity: 1;
 }

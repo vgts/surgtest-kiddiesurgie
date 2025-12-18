@@ -19,9 +19,14 @@
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <style>
+  @media (min-width: 768px) {
+    #prevSection {
+      background-size: 63%;  
+    }
+  }
+  </style>
 </head>
-
-
 
 <body class="bg-gray-100 overflow-x-hidden pb-16 md:pb-0">
   <!-- navbar -->
@@ -35,9 +40,9 @@
 
 
     <section id="prevSection"
-  class="relative w-full min-h-screen bg-cover bg-center
-         flex items-center justify-center sm:justify-end overflow-hidden"
-  style="background-image: url('assets/page1/Gently\ escort.png');">
+    class="relative w-full min-h-screen bg-cover bg-center 
+          flex items-center justify-center sm:justify-end overflow-hidden "
+    style="background-image: url('assets/page1/Gently\ escort.png');">
 
 
       <!-- Background Video -->
@@ -1707,7 +1712,7 @@ I am genuinely grateful for their expertise and highly recommend them to any par
             </button> -->
            <a href="tel:+916381130476"
    class="inline-flex flex-col
-          bg-[#476F94]
+          bg-[#FC8F3A]
           px-10 md:px-6 py-2 md:py-1
           rounded-full
           text-white
@@ -1742,28 +1747,38 @@ I am genuinely grateful for their expertise and highly recommend them to any par
           <!-- Column 2 -->
           <div
             class="sm:pt-6 md:pt-8 w-fit mx-0 flex flex-col space-y-2 items-start text-left sm:text-left order-2 md:order-none">
-            <p style="font-family: 'Futura', sans-serif; " class=" text-[22px] md:text-[16px] font-semibold">
-              Contact Us</p>
-           <a href="mailto:info@kiddisurgie.com"
-   onclick="window.open('https://mail.google.com/mail/?view=cm&to=info@kiddisurgie.com'); return false;"
-   class="text-[22px] md:text-[18px] text-[#476F94] hover:underline"
-   style="font-family: 'Futura', sans-serif;">
-  info@kiddisurgie.com
-</a>
+              <div class="w-fit">
+              <p style="font-family: 'Futura', sans-serif;"
+                class="text-[22px] md:text-[16px] font-semibold">
+                Contact Us
+              </p>
 
+              <div class="animate-hr h-[2px] bg-[#FC8F3A] mt-1"></div>
+            </div>
+
+              <a href="mailto:info@kiddisurgie.com"
+              onclick="window.open('https://mail.google.com/mail/?view=cm&to=info@kiddisurgie.com'); return false;"
+              class="text-[22px] md:text-[18px] text-[#476F94] hover:underline"
+              style="font-family: 'Futura', sans-serif;">
+                <i class="fa-solid fa-envelope pr-1"></i>
+              info@kiddisurgie.com
+              </a>
+           
             <p style="font-family: 'Futura', sans-serif;"
               class="text-[20px] md:text-[18px] pt-3 leading-relaxed">
+              <i class="fa-solid fa-location-dot pr-2"></i>
               Mehta Hospital – Chetpet <br>
               No. 2/1, 2, 3, Mc Nichols Road <br>
               3rd Lane, Chetpet, Chennai – 31
             </p>
             <p style="font-family: 'Futura', sans-serif;"
               class="text-[20px] md:text-[18px] pt-3 leading-relaxed">
+              <i class="fa-solid fa-location-dot pr-2"></i>
               Apollo Children’s Hospital <br>
               15, Shafi Mohammed Road, <br>
               Thousand Lights,Chennai – 600006 
             </p>
-
+            
           </div>
 
           <!-- Column 3 -->
