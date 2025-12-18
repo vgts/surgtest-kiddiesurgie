@@ -79,12 +79,25 @@
         <!-- INNER SECTION -->
         <div style="background-image: url('assets/page3/bg.png'); background-blend-mode: overlay;"
             class="bg-[#ECE3D0] bg-contain bg-repeat bg-center px-4 md:px-8 py-8 relative z-10">
-            <h2 style="font-family:'Rozha One', serif;" class="text-[28px] md:text-[32px] text-[#4682B4] mb-6">
+            <!-- <h2 style="font-family:'Rozha One', serif;" class="text-[28px] md:text-[32px] text-[#4682B4] mb-6">
                 Get in Touch
-            </h2>
+            </h2> -->
+            <!-- <div class="inline-block hidden md:pl-145">
+  <h2 style="font-family:'Rozha One', serif;"
+      class="text-[28px] md:text-[32px] text-[#4682B4] ">
+    Get in Touch
+  </h2> -->
+
+  <!-- underline = text width -->
+  <!-- <div class="h-[2px] w-full bg-[#FC8F3A] rounded-full mb-4"></div>
+</div> -->
 
 
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 mb-8">
+            <div class="max-w-7xl mx-auto
+            grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
+            gap-10 md:gap-20
+            mb-8">
+
 
                 <!-- LEFT SIDE — MAP (appears FIRST on mobile) -->
                 <div class="border-[14px] border-[#79A3C5]
@@ -94,29 +107,28 @@
          overflow-hidden
          shadow-lg
          order-2 md:order-1">
-                   <iframe
-  class="w-full h-full rounded-xl"
-  frameborder="0"
-  style="border:0"
-  allowfullscreen
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-   src="https://www.google.com/maps?q=No.+2/1,+2,+3,+Mc+Nichols+Road+3rd+Lane,+Chetpet,+Chennai+600031&output=embed">
-</iframe>
+                    <iframe class="w-full h-full rounded-xl" frameborder="0" style="border:0" allowfullscreen
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=No.+2/1,+2,+3,+Mc+Nichols+Road+3rd+Lane,+Chetpet,+Chennai+600031&output=embed">
+                    </iframe>
 
                 </div>
 
+<div class="hidden md:flex items-center order-2">
+  <div class="w-[1px] h-full bg-[#FC8F3A] rounded-full"></div>
+</div>
 
                 <!-- RIGHT SIDE — ADDRESS (appears SECOND on mobile) -->
-                <div class="order-1 md:order-2">
+                <div class="order-1 md:order-3">
+                   
 
                     <!-- Address Block Container -->
                     <div class="space-y-6">
-
+                       
                         <!-- Address 1 -->
                         <p style="font-family:'Futura', sans-serif;"
                             class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
-                            <strong class="text-[#4682B4]">Mehta Hospital – Chetpet</strong><br />
+                            <strong class="text-[#4682B4]"> <i class="fa-solid fa-location-dot pr-2"></i>Mehta Hospital – Chetpet</strong><br />
                             No. 2/1, 2, 3, Mc Nichols Road 3rd Lane,<br />
                             Chetpet, Chennai – 600031
                         </p>
@@ -127,7 +139,12 @@
                 </div>
 
             </div>
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 mb-8">
+
+            <div class="max-w-7xl mx-auto
+            grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
+            gap-10 md:gap-20
+            mb-8">
+
 
                 <!-- LEFT SIDE — MAP (appears FIRST on mobile) -->
                 <div class="border-[14px] border-[#79A3C5]
@@ -137,65 +154,19 @@
          overflow-hidden
          shadow-lg
          order-2 md:order-1">
-                    <iframe
-  class="w-full h-full rounded-xl"
-  frameborder="0"
-  style="border:0"
-  allowfullscreen
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps?q=Dr+Mehta's+Hospitals+Global+Campus,+Velappanchavadi,+Chennai+600077&output=embed">
-</iframe>
+                    <iframe class="w-full h-full rounded-xl" frameborder="0" style="border:0" allowfullscreen
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=15,+Shafi+Mohammed+Road,+Thousand+Lights,+Chennai+600006&output=embed">
+                    </iframe>
 
                 </div>
+
+<div class="hidden md:flex items-center order-2">
+  <div class="w-[1px] h-full bg-[#FC8F3A] rounded-full"></div>
+</div>
 
                 <!-- RIGHT SIDE — ADDRESS (appears SECOND on mobile) -->
-                <div class="order-1 md:order-2">
-
-                    <!-- Address Block Container -->
-                    <div class="space-y-6">
-
-
-
-                        <!-- Address 2 -->
-                        <p style="font-family:'Futura', sans-serif;"
-                            class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
-                            <strong class="text-[#4682B4]">Mehta Hospital – GC Velappanchavadi</strong><br />
-                            No. 50, Poonamallee High Road,<br />
-                            Velappanchavadi, Chennai – 600077
-                        </p>
-
-
-
-                    </div>
-                </div>
-
-            </div>
-            <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 mb-8">
-
-                <!-- LEFT SIDE — MAP (appears FIRST on mobile) -->
-                <div class="border-[14px] border-[#79A3C5]
-         w-full
-         h-[240px] md:h-[320px]
-         rounded-2xl
-         overflow-hidden
-         shadow-lg
-         order-2 md:order-1">
-                    <iframe
-  class="w-full h-full rounded-xl"
-  frameborder="0"
-  style="border:0"
-  allowfullscreen
-  loading="lazy"
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps?q=15,+Shafi+Mohammed+Road,+Thousand+Lights,+Chennai+600006&output=embed">
-</iframe>
-
-                </div>
-
-
-                <!-- RIGHT SIDE — ADDRESS (appears SECOND on mobile) -->
-                <div class="order-1 md:order-2">
+                <div class="order-1 md:order-3">
 
                     <!-- Address Block Container -->
                     <div class="space-y-6">
@@ -205,7 +176,7 @@
                         <!-- Address 3 -->
                         <p style="font-family:'Futura', sans-serif;"
                             class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
-                            <strong class="text-[#4682B4]">Apollo Children’s Hospital</strong><br />
+                            <strong class="text-[#4682B4]"> <i class="fa-solid fa-location-dot pr-2"></i>Apollo Children’s Hospital</strong><br />
                             15, Shafi Mohammed Road, Thousand Lights,<br />
                             Chennai – 600006
                         </p>
@@ -215,6 +186,59 @@
 
             </div>
 
+            <div class="max-w-7xl mx-auto
+            grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
+            gap-10 md:gap-20
+            mb-8">
+
+
+                <!-- LEFT SIDE — MAP (appears FIRST on mobile) -->
+                <div class="border-[14px] border-[#79A3C5]
+         w-full
+         h-[240px] md:h-[320px]
+         rounded-2xl
+         overflow-hidden
+         shadow-lg
+         order-2 md:order-1">
+                    <iframe class="w-full h-full rounded-xl" frameborder="0" style="border:0" allowfullscreen
+                        loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                        src="https://www.google.com/maps?q=Dr+Mehta's+Hospitals+Global+Campus,+Velappanchavadi,+Chennai+600077&output=embed">
+                    </iframe>
+
+                </div>
+<div class="hidden md:flex items-center order-2">
+  <div class="w-[1px] h-full bg-[#FC8F3A] rounded-full"></div>
+</div>
+
+                <!-- RIGHT SIDE — ADDRESS (appears SECOND on mobile) -->
+                <div class="order-1 md:order-3">
+
+  <!-- Address Block Container -->
+  <div class="space-y-4">
+
+    <!-- Hospital Logo -->
+    <img
+      src="assets/contactpage/mehta.svg"
+      alt="Mehta Hospital – GC Velappanchavadi"
+      class="w-36 md:w-20 h-auto object-contain"
+    />
+
+    <!-- Address -->
+    <p style="font-family:'Futura', sans-serif;"
+       class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
+      <strong class="text-[#4682B4]">
+         <i class="fa-solid fa-location-dot pr-2"></i>Mehta Hospital – GC Velappanchavadi
+      </strong><br />
+      No. 50, Poonamallee High Road,<br />
+      Velappanchavadi, Chennai – 600077
+    </p>
+
+  </div>
+</div>
+
+                </div>
+
+            </div>
         </div>
 
     </section>
