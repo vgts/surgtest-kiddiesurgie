@@ -114,7 +114,7 @@ let startX = 0;
 let currentTranslate = 0;
 let prevTranslate = 0;
 let isDragging = false;
-let isAnimating = false; // 🔒 LOCK
+let isAnimating = false; 
 
 // ---------- HELPERS ----------
 function setPosition() {
@@ -122,7 +122,7 @@ function setPosition() {
 }
 
 function slideToIndex() {
-  isAnimating = true; // 🔒 lock input
+  isAnimating = true; 
 
   const slideWidth = slides[0].offsetWidth;
   currentTranslate = -index * slideWidth;
@@ -131,7 +131,7 @@ function slideToIndex() {
   track.style.transition = "transform 0.35s ease";
   setPosition();
 
-  // 🔓 unlock after animation
+  
   setTimeout(() => {
     isAnimating = false;
   }, 350);
@@ -143,7 +143,7 @@ function clampIndex() {
 
 // ---------- POINTER DRAG ----------
 function pointerDown(e) {
-  if (isAnimating) return; // 🚫 ignore during animation
+  if (isAnimating) return; 
   isDragging = true;
   startX = e.clientX;
   track.style.transition = "none";
@@ -177,7 +177,7 @@ function pointerUp(e) {
 
 // ---------- TRACKPAD SWIPE (ONE SLIDE ONLY) ----------
 function wheelSwipe(e) {
-  if (isAnimating) return; // 🚫 prevent skipping
+  if (isAnimating) return; 
   if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
 
   e.preventDefault();
@@ -196,6 +196,46 @@ track.addEventListener("pointerup", pointerUp);
 track.addEventListener("pointercancel", pointerUp);
 track.addEventListener("pointerleave", pointerUp);
 track.addEventListener("wheel", wheelSwipe, { passive: false });
+
+const dotsContainer = document.getElementById("carouselDots");
+
+// CREATE DOTS
+function createDots() {
+  dotsContainer.innerHTML = "";
+  for (let i = 0; i < slides.length; i++) {
+    const dot = document.createElement("button");
+    dot.className =
+      "w-3 h-3 rounded-full bg-[#79A3C5] transition-all duration-300";
+    dot.addEventListener("click", () => {
+      index = i;
+      slideToIndex();
+      updateDots();
+    });
+    dotsContainer.appendChild(dot);
+  }
+}
+
+// UPDATE ACTIVE DOT
+function updateDots() {
+  [...dotsContainer.children].forEach((dot, i) => {
+    dot.classList.toggle("bg-[#FC8F3A]", i === index);
+    dot.classList.toggle("bg-[#79A3C5]", i !== index);
+    dot.classList.toggle("scale-125", i === index);
+  });
+}
+
+// CALL AFTER SLIDE CHANGE
+const originalSlideToIndex = slideToIndex;
+slideToIndex = function () {
+  originalSlideToIndex();
+  updateDots();
+};
+
+// INIT
+createDots();
+updateDots();
+
+
 
 
 //--------------FAQ section arrow --------------------//
