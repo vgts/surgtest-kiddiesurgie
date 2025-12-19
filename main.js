@@ -47,136 +47,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
-//----------------------ask a question modaal section--------------------------//
-function openQuestionModal() {
-  document.getElementById("modalBackdrop").classList.remove("hidden");
-}
-function closeQuestionModal() {
-  document.getElementById("modalBackdrop").classList.add("hidden");
-}
-
-//ask a question section
-document.getElementById("questionForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
-
-  document.getElementById("successPopup").classList.remove("hidden");
-  form.reset();
-  fetch(
-    "https://n8n.techdemo.in/webhook-test/ask-a-question",
-    {
-      method: "POST",
-      body: formData,
-    }
-  ).catch((err) => console.log("Webhook error:", err));
-  closeQuestionModal();
-});
-
-//file upload validation
-
-// function validateFile(input) {
-//     const files = input.files;
-//     const allowedTypes = ["image/png", "application/pdf"];
-
-//     for (let i = 0; i < files.length; i++) {
-//       const file = files[i];
-//       const minSize = 5 * 1024;   
-//       const maxSize = 10 * 1024;
-//       //file size
-//       if (file.size < minSize || file.size > maxSize) {
-//         alert(`"${file.name}" must be between 5 KB and 10 KB.`);
-//         input.value = ""; 
-//         return;
-//       }
-//       //file format
-//       if (!allowedTypes.includes(file.type)) {
-//         alert(`"${file.name}" is not allowed. Only PNG and PDF files are accepted.`);
-//         input.value = ""; 
-//         return;
-//       }
-//     }
-//   }
-
-//----------------appointment section---------------------//
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const form = e.target;
-  const formData = new FormData(form);
-
-  fetch(
-    "https://n8n.techdemo.in/webhook/book-appointment",
-    {
-      method: "POST",
-      body: formData,
-    }
-  ).catch(err => console.error("Webhook Error:", err));
-
-  document.getElementById("successPopup").classList.remove("hidden");
-  form.reset();
-});
-
-function closePopup() {
-  document.getElementById("successPopup").classList.add("hidden");
-}
-
 
 
 //----------------scope of services slider ---------------------------//
+//----------------scope of services slider ---------------------------//
 document.addEventListener("DOMContentLoaded", () => {
   const track = document.getElementById("carouselTrack");
-  const slides = Array.from(track.children);
   const prevBtn = document.getElementById("prevSlide");
   const nextBtn = document.getElementById("nextSlide");
-  const dotsContainer = document.getElementById("carouselDots");
+
+  if (!track) return;
+
+  const slides = [...track.children];
 
   let index = 0;
   let startX = 0;
   let currentTranslate = 0;
   let prevTranslate = 0;
   let isDragging = false;
-  let isAnimating = false;
 
-  const isMobile = () => window.innerWidth < 768;
+  const slideWidth = () => slides[0].offsetWidth;
 
-  // ---------------- HELPERS ----------------
-  function slideWidth() {
-    return slides[0].offsetWidth;
-  }
+  const setTranslate = (x) => {
+    track.style.transform = `translateX(${x}px)`;
+  };
 
-  function setPosition() {
-    track.style.transform = `translateX(${currentTranslate}px)`;
-  }
-
-  function clampIndex() {
-    index = Math.max(0, Math.min(index, slides.length - 1));
-  }
-
-  function goToSlide(i) {
-    if (isAnimating) return;
-
-    index = i;
-    clampIndex();
-
-    isAnimating = true;
+  const goToSlide = (i) => {
+    index = Math.max(0, Math.min(i, slides.length - 1));
     currentTranslate = -index * slideWidth();
     prevTranslate = currentTranslate;
-
     track.style.transition = "transform 0.35s ease";
-    setPosition();
+    setTranslate(currentTranslate);
+  };
 
-    setTimeout(() => {
-      isAnimating = false;
-    }, 350);
-
-    updateDots();
-  }
-
-  // ---------------- DRAG ----------------
+  // ---------- DRAG ----------
   track.addEventListener("pointerdown", (e) => {
-    if (isAnimating) return;
     isDragging = true;
     startX = e.clientX;
     track.style.transition = "none";
@@ -185,12 +90,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   track.addEventListener("pointermove", (e) => {
     if (!isDragging) return;
-    const deltaX = e.clientX - startX;
-    currentTranslate = prevTranslate + deltaX;
-    setPosition();
+    currentTranslate = prevTranslate + (e.clientX - startX); // 🔥 FIX
+    setTranslate(currentTranslate);
   });
 
-  track.addEventListener("pointerup", () => {
+  const endDrag = () => {
     if (!isDragging) return;
     isDragging = false;
 
@@ -201,50 +105,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (movedBy > threshold) index--;
 
     goToSlide(index);
-  });
+  };
 
-  // ---------------- ARROWS (DESKTOP) ----------------
-  prevBtn?.addEventListener("click", () => {
-    if (!isMobile()) goToSlide(index - 1);
-  });
+  track.addEventListener("pointerup", endDrag);
+  track.addEventListener("pointerleave", endDrag);
+  track.addEventListener("pointercancel", endDrag);
 
-  nextBtn?.addEventListener("click", () => {
-    if (!isMobile()) goToSlide(index + 1);
-  });
+  // ---------- ARROWS ----------
+  prevBtn?.addEventListener("click", () => goToSlide(index - 1));
+  nextBtn?.addEventListener("click", () => goToSlide(index + 1));
 
-  // ---------------- DOTS (MOBILE) ----------------
-  function createDots() {
-    dotsContainer.innerHTML = "";
-    if (!isMobile()) return;
-
-    slides.forEach((_, i) => {
-      const dot = document.createElement("button");
-      dot.className =
-        "w-3 h-3 rounded-full bg-[#79A3C5] transition-all duration-300";
-      dot.onclick = () => goToSlide(i);
-      dotsContainer.appendChild(dot);
-    });
-    updateDots();
-  }
-
-  function updateDots() {
-    if (!isMobile()) return;
-    [...dotsContainer.children].forEach((dot, i) => {
-      dot.classList.toggle("bg-[#FC8F3A]", i === index);
-      dot.classList.toggle("scale-125", i === index);
-    });
-  }
-
-  // ---------------- RESIZE ----------------
-  window.addEventListener("resize", () => {
-    goToSlide(index);
-    createDots();
-  });
-
-  // ---------------- INIT ----------------
-  createDots();
-  goToSlide(0);
+  // ---------- INIT ----------
+  window.addEventListener("load", () => goToSlide(0));
+  window.addEventListener("resize", () => goToSlide(index));
 });
+
+
 
 //--------------FAQ section arrow --------------------//
 
@@ -320,3 +196,80 @@ new Swiper(".swiper", {
     document.getElementById("serviceArrow")
       .classList.remove("rotate-180");
   });
+
+
+  //----------------------ask a question modaal section--------------------------//
+function openQuestionModal() {
+  document.getElementById("modalBackdrop").classList.remove("hidden");
+}
+function closeQuestionModal() {
+  document.getElementById("modalBackdrop").classList.add("hidden");
+}
+
+//ask a question section
+document.getElementById("questionForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  document.getElementById("successPopup").classList.remove("hidden");
+  form.reset();
+  fetch(
+    "https://n8n.techdemo.in/webhook-test/ask-a-question",
+    {
+      method: "POST",
+      body: formData,
+    }
+  ).catch((err) => console.log("Webhook error:", err));
+  closeQuestionModal();
+});
+
+//file upload validation
+
+// function validateFile(input) {
+//     const files = input.files;
+//     const allowedTypes = ["image/png", "application/pdf"];
+
+//     for (let i = 0; i < files.length; i++) {
+//       const file = files[i];
+//       const minSize = 5 * 1024;   
+//       const maxSize = 10 * 1024;
+//       //file size
+//       if (file.size < minSize || file.size > maxSize) {
+//         alert(`"${file.name}" must be between 5 KB and 10 KB.`);
+//         input.value = ""; 
+//         return;
+//       }
+//       //file format
+//       if (!allowedTypes.includes(file.type)) {
+//         alert(`"${file.name}" is not allowed. Only PNG and PDF files are accepted.`);
+//         input.value = ""; 
+//         return;
+//       }
+//     }
+//   }
+
+//----------------appointment section---------------------//
+document.getElementById("contactForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const form = e.target;
+  const formData = new FormData(form);
+
+  fetch(
+    "https://n8n.techdemo.in/webhook/book-appointment",
+    {
+      method: "POST",
+      body: formData,
+    }
+  ).catch(err => console.error("Webhook Error:", err));
+
+  document.getElementById("successPopup").classList.remove("hidden");
+  form.reset();
+});
+
+function closePopup() {
+  document.getElementById("successPopup").classList.add("hidden");
+}
+

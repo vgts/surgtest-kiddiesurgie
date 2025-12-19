@@ -271,51 +271,60 @@ sm:items-start sm:text-left
             </h4>
           </div>
           <!-- bottom side-->
-          <div id="carousel" class="relative w-full overflow-hidden">
+          <!-- <div id="carousel" class="relative w-full overflow-hidden"> -->
+            <div id="carousel" class="relative w-full overflow-hidden">
+
 
   <!-- LEFT ARROW (DESKTOP ONLY) -->
-  <button
-    id="prevSlide"
-    class="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-30
-           w-12 h-12 rounded-full bg-white
-           items-center justify-center
-           shadow-[0_10px_25px_rgba(0,0,0,0.15)]
-           transition-all duration-300
-           hover:scale-110 active:scale-95">
-    <svg class="w-5 h-5 text-[#476F94]" fill="none" stroke="currentColor" stroke-width="3"
-      viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-    </svg>
-  </button>
+  <!-- LEFT ARROW -->
+<button
+  id="prevSlide"
+  class="flex absolute left-3 md:left-6 top-1/2 -translate-y-1/2 z-30
+         w-10 h-10 md:w-12 md:h-12 rounded-full bg-white
+         items-center justify-center
+         shadow-[0_10px_25px_rgba(0,0,0,0.15)]
+         transition-all duration-300
+         hover:scale-110 active:scale-95">
+
+  <svg class="w-5 h-5 text-[#476F94]" fill="none" stroke="currentColor" stroke-width="3"
+       viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+  </svg>
+</button>
+
 
   <!-- RIGHT ARROW (DESKTOP ONLY) -->
-  <button
-    id="nextSlide"
-    class="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-30
-           w-12 h-12 rounded-full bg-white
-           items-center justify-center
-           shadow-[0_10px_25px_rgba(0,0,0,0.15)]
-           transition-all duration-300
-           hover:scale-110 active:scale-95">
-    <svg class="w-5 h-5 text-[#476F94]" fill="none" stroke="currentColor" stroke-width="3"
-      viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-    </svg>
-  </button>
+  <!-- RIGHT ARROW -->
+<button
+  id="nextSlide"
+  class="flex absolute right-3 md:right-6 top-1/2 -translate-y-1/2 z-30
+         w-10 h-10 md:w-12 md:h-12 rounded-full bg-white
+         items-center justify-center
+         shadow-[0_10px_25px_rgba(0,0,0,0.15)]
+         transition-all duration-300
+         hover:scale-110 active:scale-95">
 
-  <!-- TRACK -->
-  <!-- <div
-    id="carouselTrack"
-    class="flex transition-transform ease-out
-           cursor-grab active:cursor-grabbing
-           select-none touch-pan-y"> -->
-           <div
+  <svg class="w-5 h-5 text-[#476F94]" fill="none" stroke="currentColor" stroke-width="3"
+       viewBox="0 0 24 24">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+  </svg>
+</button>
+
+
+  
+           <!-- <div
   id="carouselTrack"
-  class="flex will-change-transform select-none">
+  class="flex will-change-transform select-none"> -->
+  <div
+  id="carouselTrack"
+  class="flex w-full transition-transform duration-300 ease-out touch-pan-y">
+
 
               <!-- CARD 1 -->
 
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl
                   bg-white text-[#476F94]
                   p-4 md:pl-10
@@ -366,7 +375,9 @@ sm:items-start sm:text-left
 
               <!-- CARD 2 -->
 
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                 bg-white text-[#476F94]
                 p-4 md:pl-10
@@ -416,7 +427,9 @@ sm:items-start sm:text-left
                 </div>
               </div>
               <!-- Card 3 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                 bg-white text-[#476F94]
                 p-4 md:pl-10
@@ -477,7 +490,9 @@ sm:items-start sm:text-left
                 </div>
               </div>
               <!-- Card 4 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                 bg-white text-[#476F94]
                 p-4 md:pl-10
@@ -559,7 +574,9 @@ sm:items-start sm:text-left
               </div>
 
               <!-- Card 5 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                   bg-white text-[#476F94]
                   p-4 md:pl-10
@@ -627,7 +644,9 @@ sm:items-start sm:text-left
 
               </div>
               <!-- Card 6 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                   bg-white text-[#476F94]
                   p-4 md:pl-10
@@ -676,7 +695,9 @@ sm:items-start sm:text-left
                 </div>
               </div>
               <!-- Card 7 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                   bg-white text-[#476F94]
                   p-4 md:pl-10
@@ -712,7 +733,9 @@ sm:items-start sm:text-left
                 </div>
               </div>
               <!-- card8 -->
-              <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10">
+              <!-- <div class="w-full h-auto flex-shrink-0 flex justify-center px-2 md:px-10"> -->
+                <div class="w-full min-w-full flex-shrink-0 flex justify-center px-2 md:px-10">
+
                 <div class="w-full max-w-7xl h-auto
                   bg-white text-[#476F94]
                   p-4 md:pl-10
@@ -759,10 +782,10 @@ sm:items-start sm:text-left
           </div>
           
  <!-- DOTS (MOBILE ONLY) -->
-<div
+<!-- <div
   id="carouselDots"
   class="w-full flex md:hidden justify-center items-center gap-3 mt-2">
-</div>
+</div> -->
 
 
     </section>
