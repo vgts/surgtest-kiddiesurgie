@@ -42,61 +42,71 @@ body {
   transform: translate(40px, 15px) !important;
 }
 
-/* Slider wrapper */
-.bg-slider {
+/* image slider */
+
+.slider-wrapper {
   position: absolute;
   inset: 0;
-  display: flex;
-  width: 200%;
-  animation: slideBg 10s infinite linear;
+  overflow: hidden;
 }
 
-/* Individual slides */
-.bg-slide {
+
+.slider-track {
+  display: flex;
+  width: 300%;
+  height: 100%;
+  animation: sliderSlide 24s ease-in-out infinite;
+}
+
+
+.slide {
   width: 100%;
   height: 100%;
   background-repeat: repeat;
   background-position: center;
 }
 
-/* Desktop size (both images same) */
-@media (min-width: 768px) {
-  .bg-slide-1 {
-    background-size: 63%;
-  }
-  .bg-slide-2 {
-    background-size: 88%;
-  }
 
-}
-
-/* First image */
-.bg-slide-1 {
+.slide-1 {
   background-image: url("assets/page1/Gently escort.png");
+  background-size: 63%;
 }
 
-/* Second image */
-.bg-slide-2 {
+.slide-2 {
   background-image: url("assets/page5/bg1.jpeg");
+  background-size: 88%;
 }
 
-/* Sliding animation */
-@keyframes slideBg {
+
+@keyframes sliderSlide {
+ 
   0% {
     transform: translateX(0%);
   }
-  45% {
+  40% {
     transform: translateX(0%);
   }
-  55% {
-    transform: translateX(-50%);
+
+  
+  50% {
+    transform: translateX(-33.333%);
   }
+
+  
+  90% {
+    transform: translateX(-33.333%);
+  }
+
+  
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-66.666%);
   }
 }
 
 
+
+
+/* shape animation */
 @keyframes spin-slow {
   0% {
     transform: rotate(0deg);
@@ -107,6 +117,7 @@ body {
   }
 }
 
+/* fonts */
 @font-face {
   font-family: "CanvaSans";
   src: url("fonts/canva-sans-regular.otf") format("opentype");
@@ -129,7 +140,7 @@ body {
   }
   80% {
     width: 100%;
-    opacity: 1; /* pause here */
+    opacity: 1;
   }
   100% {
     width: 0;
@@ -140,6 +151,8 @@ body {
 .animate-hr {
   animation: hr-reveal 4s ease-in-out infinite;
 }
+
+
 /* swiper color */
 .swiper-pagination-bullet {
   background-color: #FC8F3A; 

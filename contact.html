@@ -36,7 +36,7 @@
 
 </head>
 
-<body class="bg-gray-100 overflow-x-hidden">
+<body class="page-contact group bg-gray-100 overflow-x-hidden">
     <!-- navbar -->
     <div id="navbar" class="fixed top-0 left-0 w-full z-50"></div>
     <!-- Mobile Menu  -->
@@ -77,12 +77,12 @@
         <div class="absolute inset-0 bg-white/90"></div>
 
         <!-- INNER SECTION -->
-        <div style="background-image: url('assets/page3/bg.png'); background-blend-mode: overlay;"
-            class="bg-[#ECE3D0] bg-contain bg-repeat bg-center px-4 md:px-8 py-8 relative z-10">
+        <div 
+            class="bg-[#ECE3D0]/20 px-4 md:px-8 py-8 relative z-10">
             
             <div class="max-w-7xl mx-auto
             grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
-            gap-10 md:gap-20
+            gap-10 md:gap-14
             mb-8">
 
                 <!-- LEFT SIDE — MAP (appears FIRST on mobile) -->
@@ -113,8 +113,8 @@
 
                         <!-- Logo + Name -->
                         <div class="flex items-center gap-3">
-                            <img src="assets/contactpage/mehta.svg" alt="Mehta Hospital – GC Velappanchavadi"
-                                class="w-24 md:w-20 h-auto object-contain" />
+                            <img src="assets/contactpage/mehta's hospital.webp" alt="Mehta Hospital – GC Velappanchavadi"
+                                class="w-22 md:w-20 h-auto object-contain" />
                             <h4 style="font-family:'Futura', sans-serif;"
                                 class="text-[#4682B4] text-[20px] md:text-[22px] font-semibold">
                                 Mehta Hospital – Chetpet
@@ -124,7 +124,7 @@
                         <p style="font-family:'Futura', sans-serif;"
                             class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
                             <i class="fa-solid fa-location-dot pr-2"></i>
-                            No. 2/1, 2, 3, Mc Nichols Road 3rd Lane,<br />
+                            No. 2/1, 2, 3, Mc Nichols Road 3rd Lane,<br class="hidden md:block" />
                             Chetpet, Chennai – 600031
                         </p>
 
@@ -135,7 +135,7 @@
 
             <div class="max-w-7xl mx-auto
             grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
-            gap-10 md:gap-20
+            gap-10 md:gap-14
             mb-8">
 
 
@@ -162,13 +162,13 @@
                 <div class="order-1 md:order-3">
 
                     <!-- Address Block Container -->
-                    <div class="space-y-6">
+                    <div class="space-y-0">
 
 
                         <!-- Logo + Name -->
-                        <div class="flex items-center gap-3">
-                            <img src="assets/contactpage/apollo.svg" alt="Mehta Hospital – GC Velappanchavadi"
-                                class="w-24 md:w-20 h-auto object-contain" />
+                        <div class="flex items-center gap-0 ">
+                            <img src="assets/contactpage/apollo children hospital.webp" alt="Mehta Hospital – GC Velappanchavadi"
+                                class="-translate-x-4 w-28 md:w-34 h-auto object-contain -mr-5" />
                             <h4 style="font-family:'Futura', sans-serif;"
                                 class="text-[#4682B4] text-[20px] md:text-[22px] font-semibold">
                                 Apollo Children’s Hospital
@@ -176,9 +176,9 @@
                         </div>
                         <!-- Address 3 -->
                         <p style="font-family:'Futura', sans-serif;"
-                            class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">
+                            class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed ">
                             <i class="fa-solid fa-location-dot pr-2"></i>
-                            15, Shafi Mohammed Road, Thousand Lights,<br />
+                            15, Shafi Mohammed Road, Thousand Lights,<br class="hidden md:block" />
                             Chennai – 600006
                         </p>
 
@@ -189,7 +189,7 @@
 
             <div class="max-w-7xl mx-auto
             grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]
-            gap-10 md:gap-20
+            gap-10 md:gap-14
             mb-8">
 
 
@@ -219,8 +219,8 @@
 
                         <!-- Logo + Name -->
                         <div class="flex items-center gap-3">
-                            <img src="assets/contactpage/mehta.svg" alt="Mehta Hospital – GC Velappanchavadi"
-                                class="w-24 md:w-20 h-auto object-contain" />
+                            <img src="assets/contactpage/mehta's hospital.webp" alt="Mehta Hospital – GC Velappanchavadi"
+                                class="w-22 md:w-20 h-auto object-contain" />
                             <h4 style="font-family:'Futura', sans-serif;"
                                 class="text-[#4682B4] text-[20px] md:text-[22px] font-semibold">
                                 Mehta Hospital – GC Velappanchavadi
@@ -231,7 +231,7 @@
                         <p style="font-family:'Futura', sans-serif;"
                             class="text-[18px] md:text-[20px] text-gray-500 leading-relaxed pl-1">
                             <i class="fa-solid fa-location-dot pr-2"></i>
-                            No. 50, Poonamallee High Road,<br />
+                            No. 50, Poonamallee High Road,<br class="hidden md:block" />
                             Velappanchavadi, Chennai – 600077
                         </p>
 
@@ -245,6 +245,31 @@
         </div>
 
     </section>
+    <div id="footer"></div>
+
+    
+  <!-- Mobile Call Now Button -->
+  <a href="tel:+916381130476" class="fixed bottom-0 left-0 right-0
+          bg-[#476F94]
+          text-white
+          flex flex-col items-center justify-center
+          py-3
+          text-[18px] font-semibold
+          z-[9999]
+          md:hidden">
+
+    <!-- Top text -->
+    <span class="text-[14px] opacity-90 mb-2 text-center" style="font-family: 'CanvaSans', sans-serif;">
+      For Appointments
+    </span>
+
+    <!-- Bottom row: icon + call now -->
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-phone "></i>
+      <span style="font-family: 'CanvaSans', sans-serif;">6381130476</span>
+    </div>
+
+  </a>
 
     <!-- script -->
     <script src="main.js"></script>

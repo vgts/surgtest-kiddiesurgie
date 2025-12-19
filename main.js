@@ -28,6 +28,25 @@ Promise.all([
   });
 });
 
+//-----load footer--------------//
+// Load Footer on all pages
+document.addEventListener("DOMContentLoaded", () => {
+  fetch("footer.html")
+    .then(res => {
+      if (!res.ok) throw new Error("Footer not found");
+      return res.text();
+    })
+    .then(html => {
+      const footerContainer = document.getElementById("footer");
+      if (footerContainer) {
+        footerContainer.innerHTML = html;
+      }
+    })
+    .catch(err => console.error("Footer load error:", err));
+});
+
+
+
 //----------------------ask a question modaal section--------------------------//
 function openQuestionModal() {
   document.getElementById("modalBackdrop").classList.remove("hidden");
@@ -105,138 +124,127 @@ function closePopup() {
 
 
 
-//----------------slider ---------------------------//
-const track = document.getElementById("carouselTrack");
-const slides = track.children;
+//----------------scope of services slider ---------------------------//
+document.addEventListener("DOMContentLoaded", () => {
+  const track = document.getElementById("carouselTrack");
+  const slides = Array.from(track.children);
+  const prevBtn = document.getElementById("prevSlide");
+  const nextBtn = document.getElementById("nextSlide");
+  const dotsContainer = document.getElementById("carouselDots");
 
-let index = 0;
-let startX = 0;
-let currentTranslate = 0;
-let prevTranslate = 0;
-let isDragging = false;
-let isAnimating = false; 
+  let index = 0;
+  let startX = 0;
+  let currentTranslate = 0;
+  let prevTranslate = 0;
+  let isDragging = false;
+  let isAnimating = false;
 
-// ---------- HELPERS ----------
-function setPosition() {
-  track.style.transform = `translateX(${currentTranslate}px)`;
-}
+  const isMobile = () => window.innerWidth < 768;
 
-function slideToIndex() {
-  isAnimating = true; 
-
-  const slideWidth = slides[0].offsetWidth;
-  currentTranslate = -index * slideWidth;
-  prevTranslate = currentTranslate;
-
-  track.style.transition = "transform 0.35s ease";
-  setPosition();
-
-  
-  setTimeout(() => {
-    isAnimating = false;
-  }, 350);
-}
-
-function clampIndex() {
-  index = Math.max(0, Math.min(index, slides.length - 1));
-}
-
-// ---------- POINTER DRAG ----------
-function pointerDown(e) {
-  if (isAnimating) return; 
-  isDragging = true;
-  startX = e.clientX;
-  track.style.transition = "none";
-  track.setPointerCapture(e.pointerId);
-}
-
-function pointerMove(e) {
-  if (!isDragging || isAnimating) return;
-
-  const deltaX = e.clientX - startX;
-  currentTranslate = prevTranslate + deltaX;
-  setPosition();
-}
-
-function pointerUp(e) {
-  if (!isDragging || isAnimating) return;
-  isDragging = false;
-
-  const slideWidth = slides[0].offsetWidth;
-  const movedBy = currentTranslate - prevTranslate;
-  const threshold = slideWidth * 0.25;
-
-  if (movedBy < -threshold) index += 1;
-  else if (movedBy > threshold) index -= 1;
-
-  clampIndex();
-  slideToIndex();
-
-  track.releasePointerCapture(e.pointerId);
-}
-
-// ---------- TRACKPAD SWIPE (ONE SLIDE ONLY) ----------
-function wheelSwipe(e) {
-  if (isAnimating) return; 
-  if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
-
-  e.preventDefault();
-
-  if (e.deltaX > 30) index += 1;
-  else if (e.deltaX < -30) index -= 1;
-
-  clampIndex();
-  slideToIndex();
-}
-
-// ---------- EVENTS ----------
-track.addEventListener("pointerdown", pointerDown);
-track.addEventListener("pointermove", pointerMove);
-track.addEventListener("pointerup", pointerUp);
-track.addEventListener("pointercancel", pointerUp);
-track.addEventListener("pointerleave", pointerUp);
-track.addEventListener("wheel", wheelSwipe, { passive: false });
-
-const dotsContainer = document.getElementById("carouselDots");
-
-// CREATE DOTS
-function createDots() {
-  dotsContainer.innerHTML = "";
-  for (let i = 0; i < slides.length; i++) {
-    const dot = document.createElement("button");
-    dot.className =
-      "w-3 h-3 rounded-full bg-[#79A3C5] transition-all duration-300";
-    dot.addEventListener("click", () => {
-      index = i;
-      slideToIndex();
-      updateDots();
-    });
-    dotsContainer.appendChild(dot);
+  // ---------------- HELPERS ----------------
+  function slideWidth() {
+    return slides[0].offsetWidth;
   }
-}
 
-// UPDATE ACTIVE DOT
-function updateDots() {
-  [...dotsContainer.children].forEach((dot, i) => {
-    dot.classList.toggle("bg-[#FC8F3A]", i === index);
-    dot.classList.toggle("bg-[#79A3C5]", i !== index);
-    dot.classList.toggle("scale-125", i === index);
+  function setPosition() {
+    track.style.transform = `translateX(${currentTranslate}px)`;
+  }
+
+  function clampIndex() {
+    index = Math.max(0, Math.min(index, slides.length - 1));
+  }
+
+  function goToSlide(i) {
+    if (isAnimating) return;
+
+    index = i;
+    clampIndex();
+
+    isAnimating = true;
+    currentTranslate = -index * slideWidth();
+    prevTranslate = currentTranslate;
+
+    track.style.transition = "transform 0.35s ease";
+    setPosition();
+
+    setTimeout(() => {
+      isAnimating = false;
+    }, 350);
+
+    updateDots();
+  }
+
+  // ---------------- DRAG ----------------
+  track.addEventListener("pointerdown", (e) => {
+    if (isAnimating) return;
+    isDragging = true;
+    startX = e.clientX;
+    track.style.transition = "none";
+    track.setPointerCapture(e.pointerId);
   });
-}
 
-// CALL AFTER SLIDE CHANGE
-const originalSlideToIndex = slideToIndex;
-slideToIndex = function () {
-  originalSlideToIndex();
-  updateDots();
-};
+  track.addEventListener("pointermove", (e) => {
+    if (!isDragging) return;
+    const deltaX = e.clientX - startX;
+    currentTranslate = prevTranslate + deltaX;
+    setPosition();
+  });
 
-// INIT
-createDots();
-updateDots();
+  track.addEventListener("pointerup", () => {
+    if (!isDragging) return;
+    isDragging = false;
 
+    const movedBy = currentTranslate - prevTranslate;
+    const threshold = slideWidth() * 0.25;
 
+    if (movedBy < -threshold) index++;
+    if (movedBy > threshold) index--;
 
+    goToSlide(index);
+  });
+
+  // ---------------- ARROWS (DESKTOP) ----------------
+  prevBtn?.addEventListener("click", () => {
+    if (!isMobile()) goToSlide(index - 1);
+  });
+
+  nextBtn?.addEventListener("click", () => {
+    if (!isMobile()) goToSlide(index + 1);
+  });
+
+  // ---------------- DOTS (MOBILE) ----------------
+  function createDots() {
+    dotsContainer.innerHTML = "";
+    if (!isMobile()) return;
+
+    slides.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.className =
+        "w-3 h-3 rounded-full bg-[#79A3C5] transition-all duration-300";
+      dot.onclick = () => goToSlide(i);
+      dotsContainer.appendChild(dot);
+    });
+    updateDots();
+  }
+
+  function updateDots() {
+    if (!isMobile()) return;
+    [...dotsContainer.children].forEach((dot, i) => {
+      dot.classList.toggle("bg-[#FC8F3A]", i === index);
+      dot.classList.toggle("scale-125", i === index);
+    });
+  }
+
+  // ---------------- RESIZE ----------------
+  window.addEventListener("resize", () => {
+    goToSlide(index);
+    createDots();
+  });
+
+  // ---------------- INIT ----------------
+  createDots();
+  goToSlide(0);
+});
 
 //--------------FAQ section arrow --------------------//
 
@@ -279,3 +287,36 @@ new Swiper(".swiper", {
   grabCursor: true,
   speed: 800,
 });
+
+
+//-----------services dropdown arrow logic-------------//
+ function toggleService(select) {
+    const arrow = document.getElementById("serviceArrow");
+
+    // acts like "isOpen"
+    const isOpen = document.activeElement === select;
+
+    if (isOpen) {
+      arrow.classList.add("rotate-180");
+    } else {
+      arrow.classList.remove("rotate-180");
+    }
+  }
+
+  const serviceSelect = document.getElementById("serviceSelect");
+
+  // dropdown opened
+  serviceSelect.addEventListener("focus", () => {
+    toggleService(serviceSelect);
+  });
+
+  // dropdown closed
+  serviceSelect.addEventListener("blur", () => {
+    toggleService(null);
+  });
+
+  // option selected → close
+  serviceSelect.addEventListener("change", () => {
+    document.getElementById("serviceArrow")
+      .classList.remove("rotate-180");
+  });
