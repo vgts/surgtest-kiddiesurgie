@@ -158,7 +158,7 @@
       </button>
 
       <!-- ask a question form -->
-      <form action="https://n8n.techdemo.in/webhook-test/ask-a-question" method="POST" id="questionForm"
+      <form id="questionForm"
         enctype="multipart/form-data" class="space-y-4 mt-6">
 
         <!-- Name -->
@@ -197,22 +197,20 @@
         </div>
 
         <!-- Submit -->
-        <button type="submit" class="w-full bg-[#35516A] text-white py-2 rounded-lg font-semibold">
+        <button type="submit" class="w-full bg-[#35516A] text-white py-2 rounded-lg font-semibold cursor-pointer">
           Submit
         </button>
 
       </form>
     </div>
-
-    <!-- Success popup -->
-    <div id="successPopup" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[99999] p-4">
+  </div>
+  <!-- Success popup -->
+    <div id="questionsuccessPopup" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-[99999] p-4">
       <div class="bg-white p-6 rounded-lg text-center shadow-lg w-full max-w-xs">
         <h2 class="text-xl font-semibold text-green-600">Success!</h2>
         <p class="mt-2 text-sm">Your form has been submitted.</p>
-        <button onclick="closePopup()" class="mt-4 bg-[#35516A] text-white px-6 py-2 rounded-lg">
+        <button onclick="closeQuestionSuccessPopup()" class="mt-4 bg-[#35516A] text-white px-6 py-2 rounded-lg cursor-pointer">
           OK
         </button>
       </div>
     </div>
-
-  </div>
